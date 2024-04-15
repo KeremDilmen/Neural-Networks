@@ -79,7 +79,7 @@ class Sigmoid(Activation):
         -------
         f(z) as described above applied elementwise to `Z`
         """
-        ### YOUR CODE HERE ###
+
         return 1 / (1 + np.exp(-Z))
 
     def backward(self, Z: np.ndarray, dY: np.ndarray) -> np.ndarray:
@@ -95,7 +95,7 @@ class Sigmoid(Activation):
         -------
         gradient of loss w.r.t. input of this layer
         """
-        ### YOUR CODE HERE ###
+        
         forwarded = self.forward(Z)
         return dY * forwarded * (1 - forwarded)
 
@@ -150,7 +150,7 @@ class ReLU(Activation):
         -------
         f(z) as described above applied elementwise to `Z`
         """
-        ### YOUR CODE HERE ###
+        
         return np.maximum(0, Z)
 
     def backward(self, Z: np.ndarray, dY: np.ndarray) -> np.ndarray:
@@ -166,7 +166,7 @@ class ReLU(Activation):
         -------
         gradient of loss w.r.t. input of this layer
         """
-        ### YOUR CODE HERE ###
+       
         Z_copy = np.copy(Z)
         Z_copy = np.where(Z_copy>=0, 1, 0)
         return dY * Z_copy
@@ -188,7 +188,7 @@ class SoftMax(Activation):
         -------
         f(z) as described above applied elementwise to `Z`
         """
-        ### YOUR CODE HERE ###
+       
         Z_modified = Z - np.max(Z, axis=-1, keepdims=True)
         Z_exp = np.exp(Z_modified)
         softmax = Z_exp / np.sum(Z_exp, axis=-1, keepdims=True)
@@ -207,7 +207,7 @@ class SoftMax(Activation):
         -------
         gradient of loss w.r.t. input of this layer
         """
-        ### YOUR CODE HERE ###
+        
         probs = self.forward(Z)
         gradients = []
         i = 0

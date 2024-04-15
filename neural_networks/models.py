@@ -88,8 +88,7 @@ class NeuralNetwork(ABC):
         -------
         forward pass output, matches the shape of the output of the last layer
         """
-        ### YOUR CODE HERE ###
-        # Iterate through the network's layers.
+       
         out = X
         for layer in self.layers:
             out = layer.forward(out)
@@ -114,9 +113,7 @@ class NeuralNetwork(ABC):
         -------
         the loss of the model given the training inputs and targets
         """
-        ### YOUR CODE HERE ###
-        # Compute the loss.
-        # Backpropagate through the network's layers.
+
         model_loss = self.loss.forward(target, out)
         dL = self.loss.backward(target, out)
         for layer in reversed(self.layers):
@@ -292,9 +289,7 @@ class NeuralNetwork(ABC):
         -------
         a tuple of the prediction and loss
         """
-        ### YOUR CODE HERE ###
-        # Do a forward pass. Maybe use a function you already wrote?
-        # Get the loss. Remember that the `backward` function returns the loss.
+    
         pred = self.forward(X)
         model_loss = self.loss.forward(Y, pred)
         return pred, model_loss

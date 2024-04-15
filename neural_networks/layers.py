@@ -114,7 +114,6 @@ class FullyConnected(Layer):
         """Initialize all layer parameters (weights, biases)."""
         self.n_in = X_shape[1]
 
-        ### BEGIN YOUR CODE ###
 
         W = self.init_weights((self.n_in, self.n_out))
         b = np.zeros((1, self.n_out))
@@ -124,7 +123,6 @@ class FullyConnected(Layer):
         self.gradients = OrderedDict({"W": np.zeros(W.shape), "b": np.zeros(b.shape)})  # parameter gradients initialized to zero
                                            # MUST HAVE THE SAME KEYS AS `self.parameters`
 
-        ### END YOUR CODE ###
 
     def forward(self, X: np.ndarray) -> np.ndarray:
         """Forward pass: multiply by a weight matrix, add a bias, apply activation.
@@ -143,7 +141,6 @@ class FullyConnected(Layer):
         if self.n_in is None:
             self._init_parameters(X.shape)
 
-        ### BEGIN YOUR CODE ###
         
         # perform an affine transformation and activation
         W = self.parameters["W"]
@@ -154,7 +151,6 @@ class FullyConnected(Layer):
         # store information necessary for backprop in `self.cache`
         self.cache["Z"] = Z
         self.cache["X"] = X
-        ### END YOUR CODE ###
 
         return out
 
@@ -175,7 +171,6 @@ class FullyConnected(Layer):
         gradient of the loss with respect to the input of this layer
         shape (batch_size, input_dim)
         """
-        ### BEGIN YOUR CODE ###
         
         # unpack the cache
         W = self.parameters["W"]
@@ -194,7 +189,6 @@ class FullyConnected(Layer):
         # self.gradients["W"], etc.
         self.gradients["W"] = dW
         self.gradients["b"] = db
-        ### END YOUR CODE ###
 
         return dX
 
@@ -269,8 +263,6 @@ class Conv2D(Layer):
         n_examples, in_rows, in_cols, in_channels = X.shape
         kernel_shape = (kernel_height, kernel_width)
 
-        ### BEGIN YOUR CODE ###
-
         # implement a convolutional forward pass
 
         out_nrows = ((in_rows - kernel_height + 2 * self.pad[0]) // self.stride) + 1
@@ -293,7 +285,6 @@ class Conv2D(Layer):
         # cache any values required for backprop
         self.cache["Z"] = Z
         self.cache["X"] = X
-        ### END YOUR CODE ###
 
         return out
 
@@ -312,7 +303,6 @@ class Conv2D(Layer):
         gradient of the loss with respect to the input of this layer
         shape (batch_size, in_rows, in_cols, in_channels)
         """
-        ### BEGIN YOUR CODE ###
 
         # perform a backward pass
         W = self.parameters["W"]
@@ -348,7 +338,6 @@ class Conv2D(Layer):
         self.gradients["b"] = db
 
         dX = dX_padded[:, self.pad[0]:self.pad[0]+in_rows, self.pad[1]:self.pad[1]+in_cols, :]
-        ### END YOUR CODE ###
 
         return dX
 
@@ -412,7 +401,6 @@ class Pool2D(Layer):
         -------
         pooled array of shape (batch_size, out_rows, out_cols, channels)
         """
-        ### BEGIN YOUR CODE ###
 
         # implement the forward pass
         n_examples, in_rows, in_cols, in_channels = X.shape
@@ -439,7 +427,7 @@ class Pool2D(Layer):
         self.cache["pool_shape"] = pool_shape
         self.cache["X_pad"] = X_padded
         self.cache["X"] = X
-        ### END YOUR CODE ###
+
 
         return X_pool
 
@@ -456,7 +444,6 @@ class Pool2D(Layer):
         gradient of loss with respect to the input of this layer
         shape (batch_size, in_rows, in_cols, channels)
         """
-        ### BEGIN YOUR CODE ###
 
         # perform a backward pass
         X = self.cache["X"]
@@ -490,7 +477,6 @@ class Pool2D(Layer):
 
         dX = dX_padded[:, self.pad[0]:self.pad[0]+in_rows, self.pad[1]:self.pad[1]+in_cols, :]
         
-        ### END YOUR CODE ###
 
         return dX
 

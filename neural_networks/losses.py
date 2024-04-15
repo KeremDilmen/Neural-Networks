@@ -41,7 +41,7 @@ class CrossEntropy(Loss):
         -------
         a single float representing the loss
         """
-        ### YOUR CODE HERE ###
+       
         m = Y.shape[0]
         eps = 1e-10
         return -np.sum(Y * np.log(Y_hat + eps)) / m
@@ -60,6 +60,6 @@ class CrossEntropy(Loss):
         the gradient of the cross-entropy loss with respect to the vector of
         predictions, `Y_hat`
         """
-        ### YOUR CODE HERE ###
+        
         m = Y.shape[0]
         return - (Y/Y_hat) / m
